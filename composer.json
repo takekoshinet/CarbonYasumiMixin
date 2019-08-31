@@ -1,11 +1,20 @@
 {
+    "name": "noldor/carbon-yasumi-mixin",
+    "description": "A Carbon mixin to handle business days (using Yasumi)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "TAKEKOSHI Akishige",
+            "email": "akishige@takekoshi.net"
+        }
+    ],
     "require": {
         "nesbot/carbon": "^2.23",
         "azuyalabs/yasumi": "^2.1"
     },
     "autoload": {
         "psr-4": {
-            "CarbonYasumi\\": "src/CarbonYasumi/"
+            "CarbonYasumiMixin\\": "src/CarbonYasumiMixin/"
         }
     }
 }
