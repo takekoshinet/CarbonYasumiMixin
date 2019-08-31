@@ -1,0 +1,11 @@
+{
+    "require": {
+        "nesbot/carbon": "^2.23",
+        "azuyalabs/yasumi": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "CarbonYasumi\\": "src/CarbonYasumi/"
+        }
+    }
+}
