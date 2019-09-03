@@ -6,16 +6,40 @@ use Yasumi\Yasumi;
 
 class CarbonYasumiMixin
 {
+    protected $yasumi_list = [];
+    protected $yasumi_class;
+    protected $yasumi_locale;
+
+    /**
+     * コンストラクタ. Yasumi::create()の$year以外の引数を取る。
+     *
+     * @param string $class  holiday provider name
+     * @param int    $year   year for which the country provider needs to be created. Year needs to be a valid integer
+     *                       between 1000 and 9999.
+     */
+    public function __construct(string $yasumi_class, string $yasumi_locale = Yasumi::DEFAULT_LOCALE)
+    {
+        $this->yasumi_class  = $yasumi_class;
+        $this->yasumi_locale = $yasumi_locale;
+    }
+
+    /**
+     * Yasumiインスタンスを取得する。
+     *
+     * @return \Yasumi\ProviderInterface
+     */
     public function getYasumi()
     {
-        static $yasumi_list = [];
+        $yasumi_list   = &$this->yasumi_list;
+        $yasumi_class  = &$this->yasumi_class;
+        $yasumi_locale = &$this->yasumi_locale;
 
-        return function () use ($yasumi_list) {
-            if (! isset($yasumi_list[$this->year])) {
-                $yasumi_list[$this->year] = Yasumi::create('Japan', $this->year, 'ja_JP');
+        return function () use (&$yasumi_list, &$yasumi_class, &$yasumi_locale) {
+            if (! isset($yasumi_list[$yasumi_class][$this->year][$yasumi_locale])) {
+                $yasumi_list[$yasumi_class][$this->year][$yasumi_locale] = Yasumi::create($yasumi_class, $this->year, $yasumi_locale);
             }
 
-            return $yasumi_list[$this->year];
+            return $yasumi_list[$yasumi_class][$this->year][$yasumi_locale];
         };
     }
 

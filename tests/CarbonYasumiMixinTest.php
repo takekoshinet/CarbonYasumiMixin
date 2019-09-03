@@ -10,8 +10,8 @@ class CarbonYasumiMixinTest extends TestCase
 {
     public static function setUpBeforeClass()
     {
-        Carbon::mixin(new CarbonYasumiMixin);
-        CarbonImmutable::mixin(new CarbonYasumiMixin);
+        Carbon::mixin(new CarbonYasumiMixin('Japan', 'ja_JP'));
+        CarbonImmutable::mixin(new CarbonYasumiMixin('Japan', 'ja_JP'));
     }
 
     public function test_isBusinessday()
@@ -67,6 +67,8 @@ class CarbonYasumiMixinTest extends TestCase
 
     public function test_diffInBusinessdays()
     {
+        $this->assertEquals(7218, Carbon::parse('1990-08-01')->diffInBusinessdays(Carbon::parse('2019-09-01')));   // 年またぎ
+
         $this->assertEquals(21, Carbon::parse('2019-08-01')->diffInBusinessdays(Carbon::parse('2019-09-01')));   // 月末が土曜
         $this->assertEquals(19, Carbon::parse('2019-09-01')->diffInBusinessdays(Carbon::parse('2019-10-01')));   // 月初が日曜
         $this->assertEquals(21, Carbon::parse('2019-10-01')->diffInBusinessdays(Carbon::parse('2019-11-01')));   // 月初月末が平日
