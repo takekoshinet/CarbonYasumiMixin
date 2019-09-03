@@ -13,8 +13,8 @@ class CarbonYasumiMixin
     /**
      * コンストラクタ. Yasumi::create()の$year以外の引数を取る。
      *
-     * @param string $class  holiday provider name
-     * @param string $locale The locale to use. If empty we'll use the default locale (en_US)
+     * @param string $yasumi_class  holiday provider name
+     * @param string $yasumi_locale The locale to use. If empty we'll use the default locale (en_US)
      */
     public function __construct(string $yasumi_class, string $yasumi_locale = Yasumi::DEFAULT_LOCALE)
     {
